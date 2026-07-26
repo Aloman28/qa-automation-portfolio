@@ -4,26 +4,26 @@ class LoginPage {
   constructor(page) {
     this.page = page;
 
-    this.emailAddress = page.getByRole('textbox',{ name: 'Email Address'});
+    this.userName = page.getByRole('textbox',{ name: 'Username'});
     this.password = page.getByRole('textbox',{ name: 'Password'});
     this.signInButton = page.getByRole('button', { name: 'Login' });
-    this.accountHeading = page.getByRole('heading', { name: 'Account' });
+    this.productPage = page.locator('[data-test="secondary-header"]',{ name: 'Products' });
   }
 
   async goto() {
     await this.page.goto('https://www.saucedemo.com/');
   }
 
-  async login(emailAddress, password) {
-    await this.emailAddress.fill(emailAddress);
+  async login(userName, password) {
+    await this.userName.fill(userName);
     await this.password.fill(password);
     await this.signInButton.click();
     
   }
 
   async verifyLoginSuccess() {
-    await expect(this.page).toHaveURL('/\/account/');
-    await expect(this.accountHeading).toBeVisible();
+    await expect(this.page).toHaveURL('/\/inventory.html/');
+    await expect(this.productPage).toBeVisible();
   }
 }
 

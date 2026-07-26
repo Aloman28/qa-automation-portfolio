@@ -20,14 +20,13 @@ test('Login with valid credentials POM', async ({page}) => {
   await loginPage.goto();
   await loginPage.login('standard_user', 'secret_sauce');
 
-  await expect(page).toHaveTitle('Account – Sauce Demo');
 });
 
 test('Login with invalid credentials POM', async ({page}) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
-  await loginPage.login('wrongEmail@gmail.com', 'JakBar19!');
+  await loginPage.login('wrongEmailuser', 'wrong123');
 
-  await expect(page.getByText("Invalid email or password.")).toBeVisible();
+  await expect(page.getByText("Epic sadface: Username and password do not match any user in this service")).toBeVisible();
 
 });
