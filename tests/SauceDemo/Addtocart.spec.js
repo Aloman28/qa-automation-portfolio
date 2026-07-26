@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const LoginPage = require('../../pages/LoginPage');
+const ProductsPage = require('../../pages/ProductsPage');
 
 test.only('Add to cart and checkout', async ({page}) => {
   const loginPage = new LoginPage(page);

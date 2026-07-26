@@ -21,7 +21,7 @@ class LoginPage {
     
   }
 
-  async verifyLoginSuccess() {
+  async verifyProductsPage() {
     await expect(this.page).toHaveURL('/\/inventory.html/');
     await expect(this.productPage).toBeVisible();
   }
