@@ -15,10 +15,19 @@ test('Login with valid credentials', async ({page}) => {
 });
 
 
-test.only ('Login with valid credentials POM test', async ({page}) => {
+test('Login with valid credentials POM', async ({page}) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
   await loginPage.login('dprime@gmail.com', 'JakBar19!');
 
   await expect(page).toHaveTitle('Account – Sauce Demo');
+});
+
+test.only ('Login with invalid credentials POM', async ({page}) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.goto();
+  await loginPage.login('wrongEmail@gmail.com', 'JakBar19!');
+
+  await expect(page.getByText("Invalid email or password.")).toBeVisible();
+
 });
