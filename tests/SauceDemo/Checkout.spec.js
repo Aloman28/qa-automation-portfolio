@@ -4,18 +4,22 @@ const LoginPage = require('../../pages/LoginPage');
 test.only('Add to cart and checkout', async ({page}) => {
   const loginPage = new LoginPage(page);
   await loginPage.goto();
-  await loginPage.login('dprime@gmail.com', 'JakBar19!');
+  await loginPage.login('standard_user', 'secret_sauce');
 
-  await page.waitForURL('https://sauce-demo.myshopify.com/');
+    await expect(page.locator('[data-test="secondary-header"]')).toHaveText('ProductsName (A to Z)Name (A to Z)Name (Z to A)Price (low to high)Price (high to low)');
 
-  await page.getByRole('link', {name: 'Grey jacket Grey jacket £'}).click();
-  await page.getByRole('button', {name: 'Add to cart'}).click();
-  await page.getByRole('link', {name: 'Checkout'}).click();
+    // Add the first item to the cart
+    await page.getByText('Sauce Labs Backpack').click();
+    await page.getByRole('button', { name: 'Add to cart' }).first().click();
 
-  await expect(page.getByRole('link', { name: 'Grey jacket - Grey jacket' })).toBeVisible();
-  await page.getByRole('button', {name: 'Check Out'}).click();
+    // Go to the cart
+    await page.getByTestId('shopping-cart-link').click();
+    await expect(page).toHaveURL('/cart.html');
 
-  await expect(page.getByRole('heading', { name: 'Checkout - Sauce Demo' })).toBeVisible();
+    // Proceed to checkout
+
+
+
 
  
 });
