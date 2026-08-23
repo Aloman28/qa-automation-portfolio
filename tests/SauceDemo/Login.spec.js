@@ -1,32 +1,31 @@
 const { test, expect } = require('@playwright/test');
 const LoginPage = require('../../pages/LoginPage');
 
-test.only('Login with valid credentials', async ({page}) => {
+//All saucedemo accounts shared thesame password
+const VALID_PASSWORD ='secret_sauce';
 
-  const userName = 'standard_user';
-  const password = 'secret_sauce';
+test.describe('Saucedemo - Login', () => {
+  let loginPage;
+ 
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
+  });
 
-  await page.goto('https://www.saucedemo.com/');
-  await page.getByRole('textbox',{ name: 'username'}).fill(userName);
-  await page.getByRole('textbox',{ name: 'Password'}).fill(password);
-  await page.getByRole('button', {name: 'Login'}).click();
-  //await page.waitForLoadState('networkidle');
-  await expect(page).toHaveTitle('Swag Labs');
-});
+test('Login with valid credential', async ({page}) => {
+  await loginPage.login('standard_user', VALID_PASSWORD);
 
-
-test('Login with valid credentials POM', async ({page}) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
-  await loginPage.login('standard_user', 'secret_sauce');
+  await expect(page).toHaveURL(/.*inventory\.html/);
+  await expect(page.locator('.title')).toHaveText('Products');
 
 });
 
-test('Login with invalid credentials POM', async ({page}) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
+test('Login with invalid credential', async ({page}) => {
+ 
   await loginPage.login('wrongEmailuser', 'wrong123');
 
-  await expect(page.getByText("Epic sadface: Username and password do not match any user in this service")).toBeVisible();
+  await loginPage.expectLoginError("Epic sadface: Username and password do not match any user in this service");
+
+});
 
 });

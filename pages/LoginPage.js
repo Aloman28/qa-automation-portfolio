@@ -6,8 +6,9 @@ class LoginPage {
 
     this.userName = page.getByRole('textbox',{ name: 'Username'});
     this.password = page.getByRole('textbox',{ name: 'Password'});
-    this.signInButton = page.getByRole('button', { name: 'Login' });
+    this.loginButton = page.getByRole('button', { name: 'Login' });
     this.productPage = page.locator('[data-test="secondary-header"]',{ name: 'Products' });
+    this.ErrorMessage = page.locator('[data-test="error"]');
   }
 
   async goto() {
@@ -17,14 +18,15 @@ class LoginPage {
   async login(userName, password) {
     await this.userName.fill(userName);
     await this.password.fill(password);
-    await this.signInButton.click();
+    await this.loginButton.click();
     
   }
 
-  async verifyProductsPage() {
-    await expect(this.page).toHaveURL('/\/inventory.html/');
-    await expect(this.productPage).toBeVisible();
+   async expectLoginError(expectedMessage) {
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toContainText(expectedMessage);
   }
 }
-
-module.exports = LoginPage;
+ 
+module.exports = { LoginPage };
+ 
