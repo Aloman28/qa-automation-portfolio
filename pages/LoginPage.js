@@ -8,7 +8,7 @@ class LoginPage {
     this.password = page.getByRole('textbox',{ name: 'Password'});
     this.loginButton = page.getByRole('button', { name: 'Login' });
     this.productPage = page.locator('[data-test="secondary-header"]',{ name: 'Products' });
-    this.ErrorMessage = page.locator('[data-test="error"]');
+    this.errorMessage = page.locator('[data-test="error"]');
   }
 
   async goto() {
