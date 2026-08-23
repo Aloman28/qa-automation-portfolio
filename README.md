@@ -1,4 +1,4 @@
-![Playwright Tests](https://github.com/Aloman28/Playwright_csharp/actions/workflows/playwright.yml/badge.svg)
+![Playwright Tests](https://github.com/Aloman28/qa-automation-portfolio/actions/workflows/playwright.yml/badge.svg)
 
 ### Objective
 
