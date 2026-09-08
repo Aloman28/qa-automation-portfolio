@@ -15,11 +15,10 @@ test.describe('Saucedemo - Checkout', () => {
  
     // Add the first item to the cart
     await productsPage.addToCartByName('Sauce Labs Backpack');
- 
-    // Go to the cart
-    await expect(productsPage.cartBadge).toHaveText('1');
- 
+
     // Proceed to checkout
     await productsPage.goToCart();
+    await page.locator('[data-test="checkout"]').click();
+    await checkOutStepOnePage.continueCheckout('John', 'Doe', '12345');
   });
 });

@@ -4,10 +4,10 @@ class CheckOutStepOnePage {
   constructor(page) {
     this.page = page;
 
-    this.firstNameField = page.getByRole('textbox',{ name: 'Username'});
-    this.lastNameField = page.getByRole('textbox',{ name: 'Last Name'});
-    this.postalCodeField = page.getByRole('textbox',{ name: 'Postal Code'});
-    this.continueButton = page.getByRole('button', { name: 'Continue' });
+    this.firstNameField = page.locator('[data-test="firstName"]');
+    this.lastNameField = page.locator('[data-test="lastName"]');
+    this.postalCodeField = page.locator('[data-test="postalCode"]');
+    this.continueButton = page.locator('[data-test="continue"]');
   }
 
   async goto() {
