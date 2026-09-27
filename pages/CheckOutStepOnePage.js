@@ -11,7 +11,7 @@ class CheckOutStepOnePage {
   }
 
   async goto() {
-    await this.page.goto('https://www.saucedemo.com/');
+    await this.page.goto('https://www.saucedemo.com/checkout-step-one.html');
   }
 
   async continueCheckout(firstName, lastName, postalCode) {
