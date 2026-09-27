@@ -1,5 +1,5 @@
 ![Playwright Tests](https://github.com/Aloman28/qa-automation-portfolio/actions/workflows/playwright.yml/badge.svg)
-🚧 Work in progress — JS test suite being built out
+
 
 ### Objective
 
