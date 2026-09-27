@@ -24,9 +24,9 @@ test.describe('Saucedemo - Checkout', () => {
     await productsPage.goToCart();
     await cartPage.Checkout();
     await checkOutStepOnePage.continueCheckout('John', 'Doe', '12345');
-
     await checkOutStepTwoPage.finishCheckout();
-
+    await expect(page).toHaveURL(/.*checkout-complete\.html$/);
+    await expect(page.locator('.complete-header')).toContainText('Thank you for your order!');
     
   });
 });
